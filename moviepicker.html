@@ -22,23 +22,54 @@
                 const movieYear = data.Year; // Get the year of the first movie in the search results
                 const moviePoster = data.Poster; // Get the poster URL of the first movie in the search results
                 const movieRuntime = data.Runtime;
+                const movieRating = data.Rated;
+                const movieDirector = data.Director;
+                const movieGenre = data.Genre;
+                const moviePlot = data.Plot;
+                
+                let movieScore = '';
+                data.Ratings.forEach(rating => {
+                    movieScore += `${rating.Source}: ${rating.Value}<br>`;
+                })
 
                 resultsDiv.innerHTML = `
                     <h2>${movieTitle} (${movieYear})</h2>
                     <img src="${moviePoster}" alt="${movieTitle} Poster">
+                    <h3>Rated: ${movieRating}</h3>
+                    <h3>Director: ${movieDirector}</h3>
+                    <h3>Genre: ${movieGenre}</h3>
+                    <h3>Plot: ${moviePlot}</h3>
                     <h3>${movieRuntime}</h3>
+                    <li>${movieScore}</li>
                 `;
             } catch (error) {
                 resultsDiv.innerHTML = `<p>Error fetching movies: ${error.message}</p>`;
             }
-            
         }
+
+            async function fetchRandomMovie() {
+                const movieNameRandom = Math.floor(Math.random() * 7);
+                const randomMovieGerne = ['action', 'comedy', 'drama', 'horror', 'sci-fi', 'romance', 'thriller'];
+                const randomMovieSelect = randomMovieGerne[movieNameRandom];
+                const InputBoxRandom = document.getElementById('movieResults');
+                const response = await fetch(`http://www.omdbapi.com/?apikey=46bb50de&s=${randomMovieSelect}`);
+                const data = await response.json();
+
+                const randomMovieTitle = data.Search[0].Title;
+                const randomMovieYear = data.Search[0].Year;
+                const randomMoviePoster = data.Search[0].Poster;
+
+                InputBoxRandom.innerHTML = `
+                    <h2>${randomMovieTitle} (${randomMovieYear})</h2>
+                    <img src="${randomMoviePoster}" alt="${randomMovieTitle} Poster">
+                `;
+                }
     </script>
 
     <body>
         <input type="text" id="movieSearch" placeholder="Search for a movie...">
         <button id="searchButton" onclick="fetchMovies()">Search</button>
-        <button id="randomButton">Surprise Me</button>
+        <button id="randomButton" onclick="fetchRandomMovie()">Surprise Me</button>
 
         <div id="movieResults"></div>
     </body>
