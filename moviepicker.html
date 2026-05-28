@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <title>Movie Picker</title>
+        <link rel="stylesheet" href="style.css">
     </head>
 
     <script>
@@ -38,7 +39,8 @@
                     <h3>Rated: ${movieRating}</h3>
                     <h3>Director: ${movieDirector}</h3>
                     <h3>Genre: ${movieGenre}</h3>
-                    <h3>Plot: ${moviePlot}</h3>
+                    <button class="plot-button" onclick="togglePlot()">Show Plot</button>
+                    <h3 class="plot-section">Plot: ${moviePlot}</h3>
                     <h3>${movieRuntime}</h3>
                     <li>${movieScore}</li>
                 `;
@@ -64,7 +66,20 @@
                     <h2>${randomMovieTitle} (${randomMovieYear})</h2>
                     <img src="${randomMoviePoster}" alt="${randomMovieTitle} Poster">
                 `;
+            }
+
+            async function togglePlot() {
+                const plotSection = document.querySelector('.plot-section');
+                const plotButton = document.querySelector('.plot-button');
+
+                if (plotSection.style.display === 'none' || plotSection.style.display === '') {
+                    plotSection.style.display = 'block';
+                    plotButton.textContent = 'Hide Plot';
+                } else {
+                    plotSection.style.display = 'none';
+                    plotButton.textContent = 'Show Plot';
                 }
+            }
     </script>
 
     <body>
