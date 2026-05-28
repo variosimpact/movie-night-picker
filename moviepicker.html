@@ -51,13 +51,14 @@
                 const movieNameRandom = Math.floor(Math.random() * 7);
                 const randomMovieGerne = ['action', 'comedy', 'drama', 'horror', 'sci-fi', 'romance', 'thriller'];
                 const randomMovieSelect = randomMovieGerne[movieNameRandom];
+                const randomJSONNumber = Math.floor(Math.random() * 9);
                 const InputBoxRandom = document.getElementById('movieResults');
                 const response = await fetch(`http://www.omdbapi.com/?apikey=46bb50de&s=${randomMovieSelect}`);
                 const data = await response.json();
 
-                const randomMovieTitle = data.Search[0].Title;
-                const randomMovieYear = data.Search[0].Year;
-                const randomMoviePoster = data.Search[0].Poster;
+                const randomMovieTitle = data.Search[randomJSONNumber].Title;
+                const randomMovieYear = data.Search[randomJSONNumber].Year;
+                const randomMoviePoster = data.Search[randomJSONNumber].Poster;
 
                 InputBoxRandom.innerHTML = `
                     <h2>${randomMovieTitle} (${randomMovieYear})</h2>
