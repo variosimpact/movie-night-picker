@@ -21,10 +21,12 @@
                 const movieTitle = data.Title; // Get the title of the first movie in the search results
                 const movieYear = data.Year; // Get the year of the first movie in the search results
                 const moviePoster = data.Poster; // Get the poster URL of the first movie in the search results
+                const movieRuntime = data.Runtime;
 
                 resultsDiv.innerHTML = `
                     <h2>${movieTitle} (${movieYear})</h2>
                     <img src="${moviePoster}" alt="${movieTitle} Poster">
+                    <h3>${movieRuntime}</h3>
                 `;
             } catch (error) {
                 resultsDiv.innerHTML = `<p>Error fetching movies: ${error.message}</p>`;
