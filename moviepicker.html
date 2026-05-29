@@ -34,15 +34,16 @@
                 })
 
                 resultsDiv.innerHTML = `
-                    <h2>${movieTitle} (${movieYear})</h2>
-                    <img src="${moviePoster}" alt="${movieTitle} Poster">
-                    <h3>Rated: ${movieRating}</h3>
-                    <h3>Director: ${movieDirector}</h3>
-                    <h3>Genre: ${movieGenre}</h3>
+                <div class="movie-info" style="background-image: url(${moviePoster})">
+                    <h2 class="movie-title">${movieTitle} (${movieYear})</h2>
+                    <h3 class="movie-title">Rated: ${movieRating}</h3>
+                    <h3 class="movie-title">Director: ${movieDirector}</h3>
+                    <h3 class="movie-title">Genre: ${movieGenre}</h3>
                     <button class="plot-button" onclick="togglePlot()">Show Plot</button>
                     <h3 class="plot-section">Plot: ${moviePlot}</h3>
-                    <h3>${movieRuntime}</h3>
-                    <li>${movieScore}</li>
+                    <h3 class="movie-title">${movieRuntime}</h3>
+                    <li style="list-style: none; font-size: 12px;" class="movie-title">${movieScore}</li>
+                </div>
                 `;
             } catch (error) {
                 resultsDiv.innerHTML = `<p>Error fetching movies: ${error.message}</p>`;
@@ -83,9 +84,11 @@
     </script>
 
     <body>
-        <input type="text" id="movieSearch" placeholder="Search for a movie...">
-        <button id="searchButton" onclick="fetchMovies()">Search</button>
-        <button id="randomButton" onclick="fetchRandomMovie()">Surprise Me</button>
+        <div class="case-box">
+        <input type="text" id="movieSearch" placeholder="Search for a movie..." class="search-box">
+        <button id="searchButton" onclick="fetchMovies()" class="buttons">Search</button>
+        <button id="randomButton" onclick="fetchRandomMovie()" class="buttons">Surprise Me</button>
+        </div>
 
         <div id="movieResults"></div>
     </body>
